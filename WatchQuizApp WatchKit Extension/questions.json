@@ -1,0 +1,37 @@
+[
+    {
+        "id"            : 0,
+        "category"      : "Math",
+        "question"      : "8 x 5",
+        "answers"       : ["40", "35", "29"],
+        "correctAnswer" : "40"
+    },
+    {
+        "id"            : 1,
+        "category"      : "Math",
+        "question"      : "45 x 5",
+        "answers"       : ["245", "225", "250"],
+        "correctAnswer" : "225"
+    },
+    {
+        "id"            : 2,
+        "category"      : "Math",
+        "question"      : "12 + 13",
+        "answers"       : ["22", "25", "26"],
+        "correctAnswer" : "25"
+    },
+    {
+        "id"            : 3,
+        "category"      : "Math",
+        "question"      : "25 * 25",
+        "answers"       : ["255", "525", "625"],
+        "correctAnswer" : "625"
+    },
+    {
+        "id"            : 4,
+        "category"      : "Math",
+        "question"      : "52 / 4",
+        "answers"       : ["13", "14", "12"],
+        "correctAnswer" : "13"
+    }
+]
