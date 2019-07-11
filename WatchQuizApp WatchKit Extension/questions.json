@@ -33,5 +33,40 @@
         "question"      : "52 / 4",
         "answers"       : ["13", "14", "12"],
         "correctAnswer" : "13"
+    },
+    {
+        "id"            : 5,
+        "category"      : "History",
+        "question"      : "First man on the moon",
+        "answers"       : ["1968", "1969", "1970"],
+        "correctAnswer" : "1969"
+    },
+    {
+        "id"            : 6,
+        "category"      : "History",
+        "question"      : "Colombo discovers America",
+        "answers"       : ["1492", "1494", "1501"],
+        "correctAnswer" : "1492"
+    },
+    {
+        "id"            : 7,
+        "category"      : "Movie",
+        "question"      : "Oscars won by Forrest Gump",
+        "answers"       : ["4", "5", "6"],
+        "correctAnswer" : "6"
+    },
+    {
+        "id"            : 8,
+        "category"      : "Movie",
+        "question"      : "Oscars won by Tom Hanks",
+        "answers"       : ["1", "2", "3"],
+        "correctAnswer" : "2"
+    },
+    {
+        "id"            : 9,
+        "category"      : "Movie",
+        "question"      : "First Star Wars movie year",
+        "answers"       : ["1977", "1979", "1981"],
+        "correctAnswer" : "1977"
     }
 ]
