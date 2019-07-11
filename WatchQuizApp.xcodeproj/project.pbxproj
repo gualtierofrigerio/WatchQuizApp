@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		253D45E522D76F0300C8A482 /* QuestionsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253D45E422D76F0300C8A482 /* QuestionsListModel.swift */; };
 		2542FA3822D5E32500D55B2D /* WatchQuizApp WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 2542FA3722D5E32500D55B2D /* WatchQuizApp WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2542FA3E22D5E32500D55B2D /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2542FA3C22D5E32500D55B2D /* Interface.storyboard */; };
 		2542FA4022D5E32700D55B2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2542FA3F22D5E32700D55B2D /* Assets.xcassets */; };
@@ -22,6 +23,8 @@
 		2542FA6C22D5E8F600D55B2D /* CategoriesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542FA6B22D5E8F600D55B2D /* CategoriesList.swift */; };
 		2542FA6E22D5EA1300D55B2D /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542FA6D22D5EA1300D55B2D /* DataSource.swift */; };
 		2542FA7022D5F4C100D55B2D /* QuestionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542FA6F22D5F4C100D55B2D /* QuestionsList.swift */; };
+		2542FA7222D6368200D55B2D /* categories.json in Resources */ = {isa = PBXBuildFile; fileRef = 2542FA7122D6368200D55B2D /* categories.json */; };
+		2542FA7422D642C200D55B2D /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2542FA7322D642C200D55B2D /* Common.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		253D45E422D76F0300C8A482 /* QuestionsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsListModel.swift; sourceTree = "<group>"; };
 		2542FA3322D5E32500D55B2D /* WatchQuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchQuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2542FA3722D5E32500D55B2D /* WatchQuizApp WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WatchQuizApp WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2542FA3D22D5E32500D55B2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
@@ -86,6 +90,8 @@
 		2542FA6B22D5E8F600D55B2D /* CategoriesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesList.swift; sourceTree = "<group>"; };
 		2542FA6D22D5EA1300D55B2D /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		2542FA6F22D5F4C100D55B2D /* QuestionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionsList.swift; sourceTree = "<group>"; };
+		2542FA7122D6368200D55B2D /* categories.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = categories.json; sourceTree = "<group>"; };
+		2542FA7322D642C200D55B2D /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				2542FA6B22D5E8F600D55B2D /* CategoriesList.swift */,
+				2542FA7322D642C200D55B2D /* Common.swift */,
 				2542FA4B22D5E32700D55B2D /* ContentView.swift */,
 				2542FA6D22D5EA1300D55B2D /* DataSource.swift */,
 				2542FA4D22D5E32700D55B2D /* HostingController.swift */,
@@ -139,11 +146,13 @@
 				2542FA5122D5E32700D55B2D /* NotificationController.swift */,
 				2542FA5322D5E32700D55B2D /* NotificationView.swift */,
 				2542FA6F22D5F4C100D55B2D /* QuestionsList.swift */,
+				253D45E422D76F0300C8A482 /* QuestionsListModel.swift */,
 				2542FA5522D5E32700D55B2D /* Assets.xcassets */,
 				2542FA5A22D5E32700D55B2D /* Info.plist */,
 				2542FA5B22D5E32700D55B2D /* PushNotificationPayload.apns */,
 				2542FA5722D5E32700D55B2D /* Preview Content */,
 				2542FA6922D5E3FC00D55B2D /* questions.json */,
+				2542FA7122D6368200D55B2D /* categories.json */,
 			);
 			path = "WatchQuizApp WatchKit Extension";
 			sourceTree = "<group>";
@@ -273,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2542FA6A22D5E3FC00D55B2D /* questions.json in Resources */,
+				2542FA7222D6368200D55B2D /* categories.json in Resources */,
 				2542FA5922D5E32700D55B2D /* Preview Assets.xcassets in Resources */,
 				2542FA5622D5E32700D55B2D /* Assets.xcassets in Resources */,
 			);
@@ -288,7 +298,9 @@
 				2542FA6E22D5EA1300D55B2D /* DataSource.swift in Sources */,
 				2542FA4E22D5E32700D55B2D /* HostingController.swift in Sources */,
 				2542FA4C22D5E32700D55B2D /* ContentView.swift in Sources */,
+				253D45E522D76F0300C8A482 /* QuestionsListModel.swift in Sources */,
 				2542FA5222D5E32700D55B2D /* NotificationController.swift in Sources */,
+				2542FA7422D642C200D55B2D /* Common.swift in Sources */,
 				2542FA6C22D5E8F600D55B2D /* CategoriesList.swift in Sources */,
 				2542FA7022D5F4C100D55B2D /* QuestionsList.swift in Sources */,
 				2542FA5022D5E32700D55B2D /* ExtensionDelegate.swift in Sources */,
