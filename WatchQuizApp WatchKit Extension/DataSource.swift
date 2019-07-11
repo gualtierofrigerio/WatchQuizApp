@@ -8,8 +8,9 @@
 
 import Foundation
 
-struct Category {
+struct Category:Codable {
     var title:String
+    var color:String
     var questions:[Question]
     
     mutating func addQuestion(_ question:Question) {
@@ -33,16 +34,37 @@ class DataSource {
     init() {
         self.categories = []
         self.questions = []
+        if let categoriesUrl = Bundle.main.url(forResource: "categories", withExtension: "json") {
+            if let categories = getCategories(fromURL: categoriesUrl) {
+                self.categories = categories
+            }
+        }
         if let url = Bundle.main.url(forResource: "questions", withExtension: "json") {
             if let questions = getQuestions(fromURL: url) {
                 self.questions = questions
-                self.categories = createCategories(fromQuestions: questions)
+                if categories.count == 0 {
+                    self.categories = createCategories(fromQuestions: questions)
+                }
+                else {
+                    self.addQuestionsToCategories()
+                }
             }
         }
     }
 }
 
 extension DataSource {
+    
+    private func addQuestionsToCategories() {
+        for index in 0..<categories.count {
+            for question in questions {
+                if question.category == categories[index].title {
+                    categories[index].addQuestion(question)
+                }
+            }
+        }
+    }
+    
     private func createCategories(fromQuestions questions:[Question]) -> [Category] {
         var categories:[Category] = []
         for question in questions {
@@ -56,8 +78,19 @@ extension DataSource {
                 }
             }
             if !found {
-                categories.append(Category(title:category, questions: [question]))
+                categories.append(Category(title:category, color:"", questions: [question]))
             }
+        }
+        return categories
+    }
+    
+    private func getCategories(fromURL url:URL) -> [Category]? {
+        guard let data = try? Data(contentsOf: url) else {
+            return nil
+        }
+        let decoder = JSONDecoder()
+        guard let categories = try? decoder.decode([Category].self, from: data) else {
+            return nil
         }
         return categories
     }

@@ -6,71 +6,74 @@
 //  Copyright © 2019 Gualtiero Frigerio. All rights reserved.
 //
 
+import Combine
 import SwiftUI
-
-enum AnswerType {
-    case correct
-    case wrong
-    case unanswered
-}
 
 struct QuestionRow : View {
     var question:Question
-    @State var showAnswers = false
-    @State var correct:AnswerType = .unanswered
-    
-    var answersSheet:ActionSheet {
-        var buttons:[ActionSheet.Button] = []
-        for answer in question.answers {
-            buttons.append(.default(Text(answer), onTrigger: {
-                self.checkAnswer(answer: answer)
-            }))
-        }
-        self.showAnswers = false
-        return ActionSheet(title: Text(question.question), message: Text("Chose correct answer"), buttons: buttons)
-    }
+    var currentAnswer:AnswerType = .unanswered
     
     var body : some View {
         VStack {
-            Button(action: {
-                self.showAnswers.toggle()
-            }) {
-                HStack {
-                    Text(question.question)
-                    if correct == .correct {
-                        Text("OK")
-                            .color(.green)
-                    }
-                    else if correct == .wrong {
-                        Text("WRONG")
-                            .color(.red)
-                    }
+            HStack {
+                Text(question.question).lineLimit(3)
+                Spacer()
+                if currentAnswer == .correct {
+                    Image(systemName: "checkmark.seal")
+                        .foregroundColor(.green)
+                }
+                else if currentAnswer == .wrong {
+                    Image(systemName: "xmark.octagon.fill")
+                        .foregroundColor(.red)
                 }
             }
-        }.presentation(showAnswers ? answersSheet : nil)
-    }
-    
-    func checkAnswer(answer:String) {
-        self.showAnswers = false
-        self.correct = question.correctAnswer == answer ? .correct : .wrong
+        }
     }
 }
 
 struct QuestionsList : View {
     
-    var category:Category
+    @State private var currentQuestionId = 0
+    @State private var showAnswers = false
+    @ObjectBinding var model:QuestionsListModel
     
     var body: some View {
-        List(category.questions.identified(by: \.id)) { question in
-            QuestionRow(question: question)
-        }.navigationBarTitle(category.title)
+        List(model.questions.identified(by: \.id)) { question in
+            Button(action: {
+                self.showAnswers.toggle()
+                self.currentQuestionId = question.id
+            }) {
+                QuestionRow(question: question, currentAnswer: self.model.getAnswer(forQuestionId: question.id))
+            }
+        }.navigationBarTitle(model.category.title)
+        .presentation($showAnswers) {getActionSheetForQuestionId(currentQuestionId)}
+    }
+}
+
+extension QuestionsList {
+    private func getActionSheetForQuestionId(_ questionId:Int) -> ActionSheet {
+        var buttons:[ActionSheet.Button] = []
+        guard let question = model.getQuestion(id:questionId) else {
+            return ActionSheet(title: Text("Error"), message: Text("Couldn't find your question"), buttons: [.cancel()])
+        }
+        for answer in question.answers {
+            buttons.append(.default(Text(answer), onTrigger: {
+                self.checkAnswer(answer: answer, forQuestion: question)
+            }))
+        }
+        return ActionSheet(title: Text(question.question), message: Text("Chose correct answer"), buttons: buttons)
+    }
+    
+    private func checkAnswer(answer:String, forQuestion question:Question) {
+        self.showAnswers = false
+        self.model.setAnswer(answer, forQuestionId: question.id)
     }
 }
 
 #if DEBUG
 struct QuestionsList_Previews : PreviewProvider {
     static var previews: some View {
-        QuestionsList(category: DataSource().categories[0])
+        QuestionsList(model:QuestionsListModel(category: DataSource().categories[0]))
     }
 }
 #endif

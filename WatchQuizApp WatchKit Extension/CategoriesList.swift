@@ -15,8 +15,10 @@ struct CategoryRow : View {
         VStack(alignment: .leading) {
             Text(category.title)
                 .font(.title)
+                .foregroundColor(CommonUtility.colorFromString(colorString: category.color))
+            Spacer()
             Text("\(category.questions.count) questions")
-        }
+        }.padding()
     }
 }
 
@@ -25,7 +27,7 @@ struct CategoriesList : View {
     
     var body: some View {
         List(dataSource.categories.identified(by: \.title)) { category in
-            NavigationLink(destination:QuestionsList(category: category)) {
+            NavigationLink(destination:QuestionsList(model:QuestionsListModel(category: category))) {
                 CategoryRow(category:category)
             }
         }.listStyle(.carousel)
