@@ -26,7 +26,7 @@ struct CategoriesList : View {
     var dataSource:DataSource
     
     var body: some View {
-        List(dataSource.categories.identified(by: \.title)) { category in
+        List(dataSource.categories, id:\.title) { category in
             NavigationLink(destination:QuestionsList(model:QuestionsListModel(category: category))) {
                 CategoryRow(category:category)
             }
