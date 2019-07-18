@@ -48,11 +48,11 @@ struct QuestionsList : View {
         }
         .navigationBarTitle(model.category.title)
         .actionSheet(isPresented: $showAnswers) { getActionSheetForQuestionId(currentQuestionId)}
-        // TODO: find a way to know when the ActionSheet is dimissed with cancel
-        // Modal has the onDimiss: method but ActionSheet doesn't
-        // If you press a row after cancelling the sheet it does nothing
-        // as toggle is called on a true value setting false
-        // Setting showAnswers to true doesn't trigger the presentation
+        // At the moment showAnswers isn't set to false when the sheet
+        // is dismissed via the cancel button on the top, so it takes
+        // two taps to see the sheet again.
+        // Tapping one of the buttons (.default or .cancel) resets the
+        // variable to false
     }
 }
 
