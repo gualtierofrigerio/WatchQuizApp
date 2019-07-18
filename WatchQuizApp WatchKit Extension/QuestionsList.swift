@@ -38,15 +38,21 @@ struct QuestionsList : View {
     @ObjectBinding var model:QuestionsListModel
     
     var body: some View {
-        List(model.questions.identified(by: \.id)) { question in
+        List(model.questions, id:\.id) { question in
             Button(action: {
                 self.showAnswers.toggle()
                 self.currentQuestionId = question.id
             }) {
                 QuestionRow(question: question, currentAnswer: self.model.getAnswer(forQuestionId: question.id))
             }
-        }.navigationBarTitle(model.category.title)
-        .presentation($showAnswers) {getActionSheetForQuestionId(currentQuestionId)}
+        }
+        .navigationBarTitle(model.category.title)
+        .actionSheet(isPresented: $showAnswers) { getActionSheetForQuestionId(currentQuestionId)}
+        // TODO: find a way to know when the ActionSheet is dimissed with cancel
+        // Modal has the onDimiss: method but ActionSheet doesn't
+        // If you press a row after cancelling the sheet it does nothing
+        // as toggle is called on a true value setting false
+        // Setting showAnswers to true doesn't trigger the presentation
     }
 }
 
@@ -65,7 +71,6 @@ extension QuestionsList {
     }
     
     private func checkAnswer(answer:String, forQuestion question:Question) {
-        self.showAnswers = false
         self.model.setAnswer(answer, forQuestionId: question.id)
     }
 }

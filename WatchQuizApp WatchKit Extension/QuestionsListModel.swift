@@ -16,7 +16,7 @@ enum AnswerType {
 }
 
 class QuestionsListModel : BindableObject {
-    var didChange = PassthroughSubject<Void, Never>()
+    var willChange = PassthroughSubject<Void, Never>()
     var questions:[Question]
     var category:Category
     private var answers:[Int:AnswerType] = [:]
@@ -43,12 +43,12 @@ class QuestionsListModel : BindableObject {
     }
     
     func setAnswer(_ answer:String, forQuestionId id:Int) {
+        willChange.send()
         for index in 0..<questions.count {
             if questions[index].id == id {
                 let type:AnswerType = questions[index].correctAnswer == answer ? .correct : .wrong
                 answers[id] = type
             }
         }
-        didChange.send()
     }
 }
