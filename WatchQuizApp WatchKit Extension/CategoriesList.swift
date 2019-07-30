@@ -30,7 +30,8 @@ struct CategoriesList : View {
             NavigationLink(destination:QuestionsList(model:QuestionsListModel(category: category))) {
                 CategoryRow(category:category)
             }
-        }.listStyle(.carousel)
+            }
+        .listStyle(CarouselListStyle())
         .navigationBarTitle("Categories")
     }
 }
